@@ -1,10 +1,8 @@
 package it.unibo.pps.e1;
 
-public class SilverBankAccount extends BankAccount {
+public class BronzeBankAccount extends BankAccount {
 
-    private static final int FEE_AMOUNT = 1;
-
-    public SilverBankAccount(CoreBankAccount base) {
+    public BronzeBankAccount(CoreBankAccount base) {
         super(base);
     }
 
@@ -15,6 +13,6 @@ public class SilverBankAccount extends BankAccount {
 
     @Override
     protected int feeCalculator(final int amount) {
-        return FEE_AMOUNT;
+        return amount < 100 ? 0 : 1;
     }
 }

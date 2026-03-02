@@ -1,9 +1,29 @@
 package it.unibo.pps.e1;
 
-public interface BankAccount {
-    int getBalance();
+public abstract class BankAccount {
 
-    void deposit(int amount);
+    private final CoreBankAccount base;
 
-    void withdraw(int amount);
+    public BankAccount(CoreBankAccount base) {
+        this.base = base;
+    }
+
+    public int getBalance() {
+        return this.base.getBalance();
+    }
+
+    public void deposit(int amount) {
+        this.base.deposit(amount);
+    }
+
+    public void withdraw(int amount) {
+        if (!this.canWithdraw(amount)) {
+            throw new IllegalStateException();
+        }
+        this.base.withdraw(amount + feeCalculator(amount));
+    }
+
+    protected abstract boolean canWithdraw(int amount);
+
+    protected abstract int feeCalculator(int amount);
 }
