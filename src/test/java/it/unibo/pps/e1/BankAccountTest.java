@@ -13,7 +13,8 @@ public class BankAccountTest {
 
     @BeforeEach
     void init(){
-        this.account = new BankAccount();
+        CoreBankAccount core = new CoreBankAccount();
+        this.account = new SilverBankAccount(core);
     }
 
     @Test
