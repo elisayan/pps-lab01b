@@ -1,9 +1,18 @@
 package it.unibo.pps.e2;
 
 public interface Board {
-    boolean isInside(int i, int i1);
 
-    void checkBounds(int row, int col);
+    /**
+     * Check if the position is inside the board
+     *
+     * @param row the row index
+     * @param col the column index
+     * @return true if the position is inside the board, false otherwise
+     */
+    boolean checkBounds(int row, int col);
 
+    /**
+     * @return the size of the board
+     */
     int getSize();
 }
