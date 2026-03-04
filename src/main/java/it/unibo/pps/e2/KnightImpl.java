@@ -5,8 +5,8 @@ public class KnightImpl implements Knight {
     private Pair<Integer, Integer> position;
     private final MoveValidator validator;
 
-    public KnightImpl(Pair<Integer, Integer> start,
-                      MoveValidator validator) {
+    public KnightImpl(final Pair<Integer, Integer> start,
+                      final MoveValidator validator) {
         this.position = start;
         this.validator = validator;
     }
@@ -18,7 +18,7 @@ public class KnightImpl implements Knight {
     }
 
     @Override
-    public boolean moveTo(Pair<Integer, Integer> target) {
+    public boolean moveTo(final Pair<Integer, Integer> target) {
         if (this.validator.isValidMove(this.position, target)) {
             this.position = target;
             return true;

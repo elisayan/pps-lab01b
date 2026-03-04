@@ -8,11 +8,11 @@ public class CoreBankAccount {
         return this.balance;
     }
 
-    public void deposit(int amount) {
+    public void deposit(final int amount) {
         this.balance = this.balance + amount;
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(final int amount) {
         this.balance = this.balance - amount;
     }
 }

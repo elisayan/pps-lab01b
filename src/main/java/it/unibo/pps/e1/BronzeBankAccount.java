@@ -2,12 +2,12 @@ package it.unibo.pps.e1;
 
 public class BronzeBankAccount extends BankAccount {
 
-    public BronzeBankAccount(CoreBankAccount base) {
+    public BronzeBankAccount(final CoreBankAccount base) {
         super(base);
     }
 
     @Override
-    protected boolean canWithdraw(int amount) {
+    protected boolean canWithdraw(final int amount) {
         return getBalance() >= amount;
     }
 

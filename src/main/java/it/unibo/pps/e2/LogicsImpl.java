@@ -9,17 +9,17 @@ public class LogicsImpl implements Logics {
     private final Board board;
     private final Random random = new Random();
 
-    public LogicsImpl(int size) {
+    public LogicsImpl(final int size) {
         MoveValidator validator = new MoveValidatorImpl();
         this.board = new BoardImpl(size);
         this.pawn = randomEmptyPosition();
         this.knight = new KnightImpl(randomEmptyPosition(), validator);
     }
 
-    public LogicsImpl(Board board,
-                      Pair<Integer, Integer> pawn,
-                      Pair<Integer, Integer> knightPos,
-                      MoveValidator validator) {
+    public LogicsImpl(final Board board,
+                      final Pair<Integer, Integer> pawn,
+                      final Pair<Integer, Integer> knightPos,
+                      final MoveValidator validator) {
         this.board = board;
         this.pawn = pawn;
         this.knight = new KnightImpl(knightPos, validator);
@@ -34,7 +34,7 @@ public class LogicsImpl implements Logics {
     }
 
     @Override
-    public boolean hit(int row, int col) {
+    public boolean hit(final int row, final int col) {
         this.board.checkBounds(row, col);
 
         if (this.knight.moveTo(new Pair<>(row, col))) {
@@ -44,12 +44,12 @@ public class LogicsImpl implements Logics {
     }
 
     @Override
-    public boolean hasKnight(int row, int col) {
+    public boolean hasKnight(final int row, final int col) {
         return this.knight.getPosition().equals(new Pair<>(row, col));
     }
 
     @Override
-    public boolean hasPawn(int row, int col) {
+    public boolean hasPawn(final int row, final int col) {
         return this.pawn.equals(new Pair<>(row, col));
     }
 }

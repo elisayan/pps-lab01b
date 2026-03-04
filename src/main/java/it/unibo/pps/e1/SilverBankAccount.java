@@ -4,12 +4,12 @@ public class SilverBankAccount extends BankAccount {
 
     private static final int FEE_AMOUNT = 1;
 
-    public SilverBankAccount(CoreBankAccount base) {
+    public SilverBankAccount(final CoreBankAccount base) {
         super(base);
     }
 
     @Override
-    protected boolean canWithdraw(int amount) {
+    protected boolean canWithdraw(final int amount) {
         return getBalance() >= amount;
     }
 
