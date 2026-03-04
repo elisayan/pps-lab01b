@@ -14,14 +14,14 @@ public class BronzeBankAccountTest extends BankAccountTest {
     }
 
     @Test
-    public void testCanWithdrawWithAmountOver100(){
+    public void shouldChargeFeeOnLargeWithdraw(){
         this.account.deposit(1000);
         this.account.withdraw(200);
         assertEquals(799, this.account.getBalance());
     }
 
     @Test
-    public void testCanWithdrawWithAmountBelow100(){
+    public void shouldNotChargeFeeOnSmallWithdraw(){
         this.account.deposit(1000);
         this.account.withdraw(50);
         assertEquals(950, this.account.getBalance());

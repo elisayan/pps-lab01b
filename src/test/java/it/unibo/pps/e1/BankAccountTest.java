@@ -17,21 +17,13 @@ public abstract class BankAccountTest {
     }
 
     @Test
-    public void testInitiallyEmpty() {
+    public void shouldBeInitiallyEmpty() {
         assertEquals(0, this.account.getBalance());
     }
 
     @Test
-    public void testCanDeposit() {
+    public void shouldDeposit() {
         this.account.deposit(1000);
         assertEquals(1000, this.account.getBalance());
     }
-
-//    @Test
-//    public void testCanWithdraw() {
-//        this.account.deposit(1000);
-//        this.account.withdraw(500);
-//
-//        assertEquals(500, this.account.getBalance());
-//    }
 }
