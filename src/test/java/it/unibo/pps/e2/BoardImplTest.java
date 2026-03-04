@@ -17,22 +17,20 @@ public class BoardImplTest {
 
     @Test
     void shouldAcceptValidPositions() {
-        assertTrue(this.board.isInside(0, 0));
-        assertTrue(this.board.isInside(4, 4));
-        assertTrue(this.board.isInside(2, 3));
-    }
-
-    @Test
-    void shouldRejectInvalidPositions() {
-        assertFalse(this.board.isInside(-1, 0));
-        assertFalse(this.board.isInside(0, -1));
-        assertFalse(this.board.isInside(5, 0));
-        assertFalse(this.board.isInside(0, 5));
+        assertTrue(this.board.checkBounds(0, 0));
+        assertTrue(this.board.checkBounds(4, 4));
+        assertTrue(this.board.checkBounds(2, 3));
     }
 
     @Test
     void shouldThrowWhenOutside() {
         assertThrows(IndexOutOfBoundsException.class,
                 () -> this.board.checkBounds(-1, 0));
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> this.board.checkBounds(0, -1));
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> this.board.checkBounds(5, 0));
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> this.board.checkBounds(0, 5));
     }
 }
