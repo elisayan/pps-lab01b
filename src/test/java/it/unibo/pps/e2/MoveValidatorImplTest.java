@@ -16,7 +16,7 @@ public class MoveValidatorImplTest {
     }
 
     @Test
-    void validKnightMoves() {
+    void shouldAcceptValidKnightMoves() {
         var from = new Pair<>(0, 0);
 
         assertTrue(this.validator.isValidMove(from, new Pair<>(1, 2)));
@@ -24,7 +24,7 @@ public class MoveValidatorImplTest {
     }
 
     @Test
-    void invalidKnightMoves() {
+    void shouldRejectInvalidKnightMoves() {
         var from = new Pair<>(0, 0);
 
         assertFalse(this.validator.isValidMove(from, new Pair<>(1, 1)));

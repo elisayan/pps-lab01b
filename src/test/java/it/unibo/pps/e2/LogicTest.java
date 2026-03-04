@@ -6,88 +6,53 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LogicTest {
 
-    @Test
-    public void test() {
-        assert (true);
-        // TODO: Add your test logic here
-        // You can generate random inputs and assert the expected output
-        // For example:
-        //int result = LogicsImpl.someMethod(5, 10);
-        //assertEquals(expectedResult, result);
+    private Board board;
+    private Logics logic;
+    private MoveValidatorImpl validator;
+    private static final int SIZE = 5;
+
+    @BeforeEach
+    public void setUp() {
+        this.board = new BoardImpl(SIZE);
+        this.validator = new MoveValidatorImpl();
     }
 
     @Test
-    void shouldHasKnight() {
+    void shouldHasKnightAndPawn() {
         var pawn = new Pair<>(2, 2);
         var knight = new Pair<>(0, 1);
-        Logics logic = new LogicsImpl(5, pawn, knight);
+        this.logic = new LogicsImpl(this.board, pawn, knight, this.validator);
 
-        assertTrue(logic.hasKnight(0, 1));
-        assertTrue(logic.hasPawn(2, 2));
+        assertTrue(this.logic.hasKnight(0, 1));
+        assertTrue(this.logic.hasPawn(2, 2));
     }
 
     @Test
-    void knightShouldMoveCorrectly() {
+    void shouldIgnoreInvalidMove() {
         var pawn = new Pair<>(4, 4);
         var knight = new Pair<>(0, 0);
-        Logics logic = new LogicsImpl(5, pawn, knight);
+        this.logic = new LogicsImpl(this.board, pawn, knight, this.validator);
 
-        boolean result = logic.hit(1, 2);
-
-        assertFalse(result);
-        assertTrue(logic.hasKnight(1, 2));
+        assertFalse(this.logic.hit(1, 1));
+        assertTrue(this.logic.hasKnight(0, 0));
     }
 
     @Test
-    void invalidMoveShouldDoesNothing() {
-        var pawn = new Pair<>(4, 4);
-        var knight = new Pair<>(0, 0);
-        Logics logic = new LogicsImpl(5, pawn, knight);
-
-        boolean result = logic.hit(1, 1);
-
-        assertFalse(result);
-        assertTrue(logic.hasKnight(0, 0));
-    }
-
-    @Test
-    void hitReturnsTrueIfPawnCaptured() {
+    void shouldCapturePawn() {
         var pawn = new Pair<>(1, 2);
         var knight = new Pair<>(0, 0);
-        Logics logic = new LogicsImpl(5, pawn, knight);
+        this.logic = new LogicsImpl(this.board, pawn, knight, this.validator);
 
-        boolean result = logic.hit(1, 2);
-
-        assertTrue(result);
+        assertTrue(this.logic.hit(1, 2));
     }
 
     @Test
-    void outOfBoundsThrows() {
+    void shouldThrowIfOutOfBounds() {
         var pawn = new Pair<>(2, 2);
         var knight = new Pair<>(0, 0);
-        Logics logic = new LogicsImpl(5, pawn, knight);
+        this.logic = new LogicsImpl(this.board, pawn, knight, this.validator);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            logic.hit(-1, 0);
-        });
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> this.logic.hit(-1, 0));
     }
-
-    @Test
-    void validKnightMoves() {
-        MoveValidator validator = new MoveValidatorImpl();
-        var from = new Pair<>(0, 0);
-
-        assertTrue(validator.isValidMove(from, new Pair<>(1, 2)));
-        assertTrue(validator.isValidMove(from, new Pair<>(2, 1)));
-    }
-
-    @Test
-    void invalidKnightMoves() {
-        MoveValidator validator = new MoveValidatorImpl();
-        var from = new Pair<>(0, 0);
-
-        assertFalse(validator.isValidMove(from, new Pair<>(1, 1)));
-        assertFalse(validator.isValidMove(from, new Pair<>(0, 2)));
-    }
-
 }

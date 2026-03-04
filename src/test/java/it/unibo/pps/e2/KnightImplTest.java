@@ -1,44 +1,40 @@
 package it.unibo.pps.e2;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class KnightImplTest {
 
-    @Test
-    void knightHasInitialPosition() {
-        var start = new Pair<>(0, 0);
+    private KnightImpl knight;
+    private Pair<Integer, Integer> start;
+
+    @BeforeEach
+    public void setUp() {
         MoveValidator validator = new MoveValidatorImpl();
-
-        Knight knight = new KnightImpl(start, validator);
-
-        assertEquals(start, knight.getPosition());
+        this.start = new Pair<>(0, 0);
+        this.knight = new KnightImpl(this.start, validator);
     }
 
     @Test
-    void knightMovesIfMoveIsValid() {
-        var start = new Pair<>(0, 0);
-        MoveValidator validator = new MoveValidatorImpl();
+    void shouldHaveInitialPosition() {
+        assertEquals(this.start, this.knight.getPosition());
+    }
 
-        Knight knight = new KnightImpl(start, validator);
-
-        boolean moved = knight.moveTo(new Pair<>(1, 2));
+    @Test
+    void shouldMoveIfValid() {
+        boolean moved = this.knight.moveTo(new Pair<>(1, 2));
 
         assertTrue(moved);
-        assertEquals(new Pair<>(1, 2), knight.getPosition());
+        assertEquals(new Pair<>(1, 2), this.knight.getPosition());
     }
 
     @Test
-    void knightDoesNotMoveIfMoveInvalid() {
-        var start = new Pair<>(0, 0);
-        MoveValidator validator = new MoveValidatorImpl();
-
-        Knight knight = new KnightImpl(start, validator);
-
-        boolean moved = knight.moveTo(new Pair<>(1, 1));
+    void shouldNotMoveIfInvalid() {
+        boolean moved = this.knight.moveTo(new Pair<>(1, 1));
 
         assertFalse(moved);
-        assertEquals(start, knight.getPosition());
+        assertEquals(this.start, this.knight.getPosition());
     }
 }
