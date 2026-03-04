@@ -20,4 +20,9 @@ public class BoardImpl implements Board {
             throw new IndexOutOfBoundsException();
         }
     }
+
+    @Override
+    public int getSize() {
+        return this.size;
+    }
 }
